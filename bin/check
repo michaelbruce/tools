@@ -2,7 +2,7 @@
 
 set -e
 
-arr=("toolkit" "notes")
+arr=("tools" "notes")
 
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
