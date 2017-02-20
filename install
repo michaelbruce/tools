@@ -10,7 +10,7 @@ function symlink_nvim_configuration {
 
     if [[ ! -e ~/.config/nvim/colors/white.vim ]]; then
         mkdir -p ~/.config/nvim/colors
-        ln -sfv $BASE/colors/white.vim ~/.config/vim/colors/white.vim
+        ln -sfv $BASE/colors/white.vim ~/.config/nvim/colors/white.vim
     fi
 }
 
@@ -71,9 +71,9 @@ function install_vim_tools {
         echo 'Installing plug.vim...'
         export GIT_SSL_NO_VERIFY=true
         curl --insecure -fLo ~/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
-        vim +PlugInstall +qall
+        nvim +PlugInstall +qall
     else
-        vim +PlugUpdate +qall
+        nvim +PlugUpdate +qall
     fi
 }
 
