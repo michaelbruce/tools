@@ -1,0 +1,26 @@
+#!/usr/bin/ruby
+#
+# Replaces https git origin with git@ version
+# that uses your ssh key instead of a password
+
+git_output = `git remote -v`.split("\n")
+current_url = ""
+
+git_output.each do |line|
+  current_url = line.split(" ")[1] if line.include?('origin')
+end
+
+puts "Current is: #{current_url}"
+modified_url = current_url.gsub('https://','git@')
+                          .sub(/(?<!\/)\/(?!\/)/, ':')
+                          .sub(/^(.+@)/,'git@')
+
+puts "New Origin remote URL will be: #{modified_url}\nContinue? (y/n)"
+
+if gets.chomp == 'y'
+  puts 'Assigning modified_url to origin'
+  `git remote set-url origin #{modified_url}`
+else
+  puts 'Exiting...'
+end
+

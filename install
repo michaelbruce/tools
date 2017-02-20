@@ -1,0 +1,126 @@
+#!/bin/bash
+
+cd $(dirname $BASH_SOURCE)
+BASE=$(pwd)
+PLATFORM=$(uname -s)
+
+function symlink_nvim_configuration {
+    mkdir -p ~/.config/nvim
+    ln -sfv $BASE/init.vim ~/.config/nvim/init.vim
+
+    if [[ ! -e ~/.config/nvim/colors/white.vim ]]; then
+        mkdir -p ~/.config/nvim/colors
+        ln -sfv $BASE/colors/white.vim ~/.config/vim/colors/white.vim
+    fi
+}
+
+function symlink_tools_to_home_directory {
+    for rc in *rc *profile Xresources gitconfig githelpers; do
+        mkdir -pv backup
+        [ -e ~/.$rc ] && mv -v ~/.$rc backup/.$rc >/dev/null
+        ln -sfv $BASE/$rc ~/.$rc
+    done
+
+    [ -e ~/.lein/profiles.clj ] && mv -v ~/.lein/profiles.clj backup/profiles.clj >/dev/null
+    mkdir -p ~/.lein/
+    ln -sfv $BASE/profiles.clj ~/.lein/profiles.clj >/dev/null
+
+    [ -e ~/.boot/boot.properties ] && mv -v ~/.boot/boot.properties backup/boot.properties >/dev/null
+    mkdir -p ~/.boot/
+    ln -sfv $BASE/boot.properties ~/.boot/boot.properties >/dev/null
+
+    [ -e ~/.tmux.conf ] && mv -v ~/.tmux.conf backup/.tmux.conf
+    [ ! -e ~/.tmux.conf ] && ln -sfv $BASE/tmux.conf ~/.tmux.conf
+
+    symlink_nvim_configuration
+}
+
+function install_ruby_tools {
+    if [[ ! -e /usr/local/share/chruby/chruby.sh ]]; then
+        wget -O /tmp/chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+        tar -xzvf /tmp/chruby-0.3.9.tar.gz -C /tmp
+        cd /tmp/chruby-0.3.9
+        sudo make install
+        cd -
+    fi
+
+    if [[ ! -e /usr/local/bin/ruby-install ]]; then
+        wget -O /tmp/ruby-install-0.5.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.5.0.tar.gz
+        tar -xzvf /tmp/ruby-install-0.5.0.tar.gz -C /tmp
+        cd /tmp/ruby-install-0.5.0
+        sudo make install
+        cd -
+    fi
+}
+
+function install_clojure_tools {
+    if [[ ! -e /usr/local/bin/lein ]]; then
+        sudo wget -O /usr/local/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+        sudo chmod 755 /usr/local/bin/lein
+    fi
+
+    if [[ ! -e /usr/local/bin/boot ]]; then
+        sudo bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
+        boot
+    fi
+}
+
+function install_vim_tools {
+    mkdir -p ~/.config/nvim/autoload
+    if [[ ! -e ~/.config/nvim/autoload/plug.vim ]]; then
+        echo 'Installing plug.vim...'
+        export GIT_SSL_NO_VERIFY=true
+        curl --insecure -fLo ~/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+        vim +PlugInstall +qall
+    else
+        vim +PlugUpdate +qall
+    fi
+}
+
+function arch_utilities {
+    pacman -S acpi
+    pacman -S ttf-inconsolata
+    pacman -S ruby
+}
+
+function compile_vim {
+    [ ! -e /tmp/vim ] && git clone https://github.com/vim/vim.git /tmp/vim
+
+    cd /tmp/vim
+    make distclean
+
+    if [ "$PLATFORM" == Darwin ]; then
+        ./configure --with-features=huge \
+            --enable-pythoninterp=yes
+    else
+        ./configure --with-features=huge \
+            --enable-pythoninterp=yes \
+            --enable-xterm-clipboard=yes \
+            --with-x \
+            --enable-gui
+    fi
+
+    sudo make install
+    sudo cp $(which vim) /usr/bin/vi
+    sudo cp $(which vim) /usr/local/bin/vi
+}
+
+function install_core_utils {
+    if [ "$PLATFORM" == Darwin ]; then
+        # check that don't already have brew
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        # check you don't have these either
+        brew install wget bash findutils tmux ag gpg pass autoconf automake gnutls git-crypt htop
+        # findutils should map gfind to find if not automatic?
+    fi
+}
+
+function main {
+    symlink_tools_to_home_directory
+    install_core_utils
+    install_ruby_tools
+    install_clojure_tools
+    install_vim_tools
+}
+
+main

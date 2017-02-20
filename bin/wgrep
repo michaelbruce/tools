@@ -1,0 +1,17 @@
+#!/usr/bin/ruby
+
+require 'zip/zip'
+
+search_term = ARGV[0] or fail 'no search term provided!'
+count = 0
+Dir.glob('./**/*.docx') do |file|
+  document_xml = Zip::ZipFile.new(file).read('word/document.xml')
+  if document_xml.include?(search_term)
+    puts file
+    count += 1
+  end
+end
+
+puts "--------------------------------------------------------------------------------"
+puts "Found #{count} matches for '#{search_term}'"
+puts "Number of Documents: #{Dir.glob('./**/*.docx').count}"

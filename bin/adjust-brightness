@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+# only intended for single term window use
+
+current_value=`cat /sys/class/backlight/intel_backlight/brightness`
+updated_value=`expr $current_value + $1`
+
+if [[ $updated_value -lt 1808 && $updated_value -gt 0 ]]; then
+    tee /sys/class/backlight/intel_backlight/brightness <<< $updated_value
+fi

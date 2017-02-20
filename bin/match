@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+PLATFORM=$(uname -s)
+RED="\033[0;31m"
+NORMAL="\033[m"
+
+export ORIGIN=`pwd`
+echo -e "$RED==== Updating notes ===$NORMAL"
+cd ~/notes && git pull --ff-only
+echo -e "$RED=== Updating toolkit ===$NORMAL"
+cd ~/toolkit && git pull --ff-only
+cd $ORIGIN
+
+
+if [ "$PLATFORM" == Darwin ]; then
+    echo 'Using OSX, run brew upgrade?'
+else
+    read -p "Using Linux, run pacman -Syu? (Y/n):" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo pacman -Syu
+    fi
+fi

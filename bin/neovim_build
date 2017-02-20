@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+if [[ ! -d ~/code/neovim ]]; then
+    echo 'neovim does not exist'
+else
+    echo 'neovim exists'
+    git pull --ff-only
+fi
+
+exit
+
+cd ~/code/neovim
+rm -r build
+make clean
+make CMAKE_BUILD_TYPE=Release

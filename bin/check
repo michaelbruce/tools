@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+arr=("toolkit" "notes")
+
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+NORMAL="\033[m"
+
+for i in "${arr[@]}"
+do
+    cd "$HOME/$i"
+    message=`git log --pretty="tformat:%d %s" -1` 2>&1
+    file_changes=`git status -bs --porcelain`
+    color=$RED
+    if [[ $message == *"origin/master"* ]]; then
+        color=$GREEN
+    fi
+    echo -e "$i:${color}${message}${NORMAL}"
+    echo -e "$file_changes"
+    cd - > /dev/null
+done

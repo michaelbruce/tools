@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+lein_processes() {
+    ps ex | ag lein | grep -v 'ag lein' | cut -d ' ' -f1
+}
+
+for x in $(lein_processes); do
+    echo "Killing process $x..."
+    kill $x
+done
