@@ -20,7 +20,9 @@ Plug 'guns/xterm-color-table.vim', { 'on' : 'XtermColorTable' }
 " Languages
 Plug 'sentient-lang/vim-sentient', { 'for' : 'sentient' }
 Plug 'michaelbruce/vim-chruby', { 'for' : 'ruby' }
+Plug 'neovim/node-host'
 Plug 'michaelbruce/replay.nvim', { 'for' : 'clojure' }
+" Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'michaelbruce/vim-parengage', { 'for' : ['clojure', 'lisp'] }
 Plug 'guns/vim-clojure-static', { 'for' : 'clojure' }
 Plug 'guns/vim-clojure-highlight', { 'for' : 'clojure' }

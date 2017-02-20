@@ -110,7 +110,11 @@ function install_core_utils {
         # check that don't already have brew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         # check you don't have these either
-        brew install wget bash findutils tmux ag gpg pass autoconf automake gnutls git-crypt htop
+        brew install wget bash findutils tmux ag gpg pass autoconf automake gnutls git-crypt htop cmake
+	brew install libtool automake cmake pkg-config gettext
+    # rlwrap phantomjs
+
+
         # findutils should map gfind to find if not automatic?
     fi
 }

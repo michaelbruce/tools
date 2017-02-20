@@ -1,1 +1,0 @@
-/home/mikepjb/toolkit/vimrc

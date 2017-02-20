@@ -10,7 +10,7 @@ shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
 bind '"\C-g":" nvim $(find ~/notes/* -type f | selecta)\n"'
-bind '"\C-q":" cd ~/code/$(find ~/code/* -maxdepth 0 -type d -printf \"%f\n\"| selecta)\n"'
+bind '"\C-q":" cd ~/code/$(find ~/code/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
 
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
