@@ -9,7 +9,7 @@ NORMAL="\033[m"
 export ORIGIN=`pwd`
 echo -e "$RED==== Updating notes ===$NORMAL"
 cd ~/notes && git pull --ff-only
-echo -e "$RED=== Updating toolkit ===$NORMAL"
+echo -e "$RED=== Updating tools ===$NORMAL"
 cd ~/toolkit && git pull --ff-only
 cd $ORIGIN
 
