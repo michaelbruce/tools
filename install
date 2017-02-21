@@ -66,6 +66,10 @@ function install_clojure_tools {
 }
 
 function install_vim_tools {
+    if [[ ! -e /usr/local/bin/nvim ]]; then
+        $BASE/bin/tool-build-neovim
+    fi
+
     mkdir -p ~/.config/nvim/autoload
     if [[ ! -e ~/.config/nvim/autoload/plug.vim ]]; then
         echo 'Installing plug.vim...'
@@ -81,28 +85,6 @@ function arch_utilities {
     pacman -S acpi
     pacman -S ttf-inconsolata
     pacman -S ruby
-}
-
-function compile_vim {
-    [ ! -e /tmp/vim ] && git clone https://github.com/vim/vim.git /tmp/vim
-
-    cd /tmp/vim
-    make distclean
-
-    if [ "$PLATFORM" == Darwin ]; then
-        ./configure --with-features=huge \
-            --enable-pythoninterp=yes
-    else
-        ./configure --with-features=huge \
-            --enable-pythoninterp=yes \
-            --enable-xterm-clipboard=yes \
-            --with-x \
-            --enable-gui
-    fi
-
-    sudo make install
-    sudo cp $(which vim) /usr/bin/vi
-    sudo cp $(which vim) /usr/local/bin/vi
 }
 
 function install_core_utils {

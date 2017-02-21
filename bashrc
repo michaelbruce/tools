@@ -110,3 +110,4 @@ viw() {
 cs() {
     cd *$1*
 }
+source /usr/share/nvm/init-nvm.sh
