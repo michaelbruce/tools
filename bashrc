@@ -39,6 +39,8 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+[ -f /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
+# Do I want fzf in bash? [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
 alias space='df -h'
@@ -110,4 +112,3 @@ viw() {
 cs() {
     cd *$1*
 }
-source /usr/share/nvm/init-nvm.sh

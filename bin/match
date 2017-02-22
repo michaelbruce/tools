@@ -10,7 +10,7 @@ export ORIGIN=`pwd`
 echo -e "$RED==== Updating notes ===$NORMAL"
 cd ~/notes && git pull --ff-only
 echo -e "$RED=== Updating tools ===$NORMAL"
-cd ~/toolkit && git pull --ff-only
+cd ~/tools && git pull --ff-only
 cd $ORIGIN
 
 

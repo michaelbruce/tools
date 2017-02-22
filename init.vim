@@ -16,6 +16,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/rainbow_parentheses.vim', { 'on' : 'RainbowParentheses' }
 Plug 'guns/xterm-color-table.vim', { 'on' : 'XtermColorTable' }
+Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Languages
 Plug 'sentient-lang/vim-sentient', { 'for' : 'sentient' }
@@ -121,7 +123,34 @@ function! SelectaFile(path)
                 \"-o -type f ! -regex '.*\\(pyc\\|gz\\)' -print", "", ":e")
 endfunction
 
-nnoremap <leader>f :call SelectaFile(".")<cr>
+nnoremap <leader>f :FZF<cr>
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=7
+  highlight fzf2 ctermfg=23 ctermbg=7
+  highlight fzf3 ctermfg=237 ctermbg=7
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fzf\ -
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" nnoremap <leader>f :call SelectaFile(".")<cr>
 nnoremap <leader>w :call SelectaCommand(
             \"find " .
             \"$(find ~/code/* -maxdepth 0 -type d \| selecta)" .
