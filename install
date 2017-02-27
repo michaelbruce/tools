@@ -85,6 +85,7 @@ function arch_utilities {
     pacman -S acpi
     pacman -S ttf-inconsolata
     pacman -S ruby
+    pacman -S cloudfoundry-cli
 }
 
 function install_core_utils {
