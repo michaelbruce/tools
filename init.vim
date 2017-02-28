@@ -40,6 +40,7 @@ augroup filetypeCustomisations
   autocmd!
   au FileType python setl sw=2 sts=2 et
   au FileType vim setl sw=2 sts=2 et
+  au FileType r setl sw=2 sts=2 et
   au FileType gitcommit set textwidth=72
   autocmd FileType c set complete-=i
   autocmd BufNewFile,BufReadPost *.notes set filetype=notes

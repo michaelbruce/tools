@@ -30,6 +30,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     /usr/local/bin
     /usr/local/share/python
     /usr/local/opt/go/libexec/bin
+    /usr/local/texlive/2016/bin/x86_64-darwin/
     $PATH
     )
 
