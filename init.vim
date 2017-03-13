@@ -204,4 +204,4 @@ if getline(1) =~# '^#!.*/usr/bin/env\s\+scsh.*\>'
     setfiletype lisp
 endif
 
-nnoremap <leader>y :!tmux attach -t repl<CR>
+nnoremap <leader>y :belowright split \| term tmux attach -t repl<CR>
