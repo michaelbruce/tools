@@ -40,6 +40,8 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+chruby 2.3.1
+
 [ -f /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
 # Do I want fzf in bash? [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -60,6 +62,7 @@ alias ts2="printf '\e[8;20;100t'"
 alias ..='cd ..'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
+alias ice='cd ~/.config/nvim/plugged/ice.nvim'
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
