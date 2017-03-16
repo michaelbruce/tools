@@ -62,7 +62,10 @@ alias ts2="printf '\e[8;20;100t'"
 alias ..='cd ..'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
+
+# Ice dev
 alias ice='cd ~/.config/nvim/plugged/ice.nvim'
+export NVIM_RUBY_LOG_FILE=~/helpful.log
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
