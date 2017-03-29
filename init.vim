@@ -51,6 +51,7 @@ augroup filetypeCustomisations
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
   autocmd BufNewFile,BufReadPost *.pxi set filetype=clojure
   autocmd BufNewFile,BufReadPost *.{clj,cljs} silent! JackIn
+  autocmd BufNewFile,BufReadPost .Rprofile set filetype=r
 augroup END
 
 set background=light
