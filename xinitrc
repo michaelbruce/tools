@@ -12,10 +12,10 @@ LANG="en_GB.UTF-8"
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-xrdb -merge ~/tools/colors/night.xresource
+xrdb -merge ~/tools/appearance/night.xresource
 
 if [ "$THEME" == white ]; then
-    xrdb -merge ~/tools/colors/white.xresource
+    xrdb -merge ~/tools/appearance/white.xresource
 fi
 
 xmodmap ~/.Xmodmap
