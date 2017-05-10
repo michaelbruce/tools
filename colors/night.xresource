@@ -10,39 +10,39 @@
 ! green is 167 224 64
 ! orange (light yellow) is 252 150 32
 
-*xterm*background: #2b2b2b
-*xterm*foreground: #ffffff
-*xterm*cursorColor: #ffffff
+*xterm*background: #1b1d1e
+*xterm*foreground: #f8f8f2
+*xterm*cursorColor: #f8f8f2
 
 ! Black/grey
-*xterm*color0: #2b2b2b
+*xterm*color0: #1b1d1e
 *xterm*color8: #7c7c7c
 
 ! Red
-*xterm*color1: #94064b
+*xterm*color1: #f62d71
 *xterm*color9: #b9075d
 
 ! Green
-*xterm*color2: #009211
+*xterm*color2: #a7e040
 *xterm*color10: #009211
 
 ! Yellow
-*xterm*color3: #c37522
-*xterm*color11: #ebc032
+*xterm*color3: #e6da7b
+*xterm*color11: #fc9620
 
 ! Blue
-*xterm*color4: #182981
+*xterm*color4: #6bd9ed
 *xterm*color12: #223bbc
 
 ! Magenta (Purple in this time)
-*xterm*color5: #664892
+*xterm*color5: #ab83f8
 *xterm*color13: #996cda
 
 ! Cyan (Light Pink in this theme)
-*xterm*color6: #0e72a4
+*xterm*color6: #6bd9ed
 *xterm*color14: #13a1e7
 
 ! White
-*xterm*color7: #ffffff
-*xterm*color15: #ffffff
+*xterm*color7: #f8f8f2
+*xterm*color15: #f8f8f2
 
