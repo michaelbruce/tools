@@ -8,10 +8,13 @@ function symlink_nvim_configuration {
     mkdir -p ~/.config/nvim
     ln -sfv $BASE/init.vim ~/.config/nvim/init.vim
 
-    if [[ ! -e ~/.config/nvim/colors/white.vim ]]; then
-        mkdir -p ~/.config/nvim/colors
-        ln -sfv $BASE/colors/white.vim ~/.config/nvim/colors/white.vim
-    fi
+
+    for colorscheme in white night; do
+        if [[ ! -e ~/.config/nvim/colors/$colorscheme.vim ]]; then
+            mkdir -p ~/.config/nvim/colors
+            ln -sfv $BASE/colors/$colorscheme.vim ~/.config/nvim/colors/$colorscheme.vim
+        fi
+    done
 }
 
 function symlink_tools_to_home_directory {

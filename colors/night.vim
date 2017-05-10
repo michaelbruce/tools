@@ -12,7 +12,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "black"
+let g:colors_name = "night"
 
 let s:offset = 0 " TODO should be set dynamically, static for testing only
 let s:display = 'cterm'
@@ -23,16 +23,9 @@ if has("gui_running")
     set guicursor+=n-v-c:blinkon0
 end
 
-if $TERM == 'linux'
-    let s:background = ["0", "08", "#000000", "#1d1e1a"][s:offset]
-    let s:text = ["7", "07", "#bcbcbc", "#EEEEEE"][s:offset]
-    let s:cursorline = ["36", "23", "#ff0087", "#DDDDDD"][s:offset]
-else
-    let s:background = ["7", "08", "#000000", "#1d1e1a"][s:offset]
-    let s:text = ["0", "07", "#bcbcbc", "#EEEEEE"][s:offset]
-    let s:cursorline = ["255", "23", "#ff0087", "#DDDDDD"][s:offset]
-endif
-
+let s:background = ["0", "08", "#000000", "#1d1e1a"][s:offset]
+let s:text = ["7", "07", "#bcbcbc", "#EEEEEE"][s:offset]
+let s:cursorline = ["236", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:greybackground = ["249", "07", "#595959", "#DDDDDD"][s:offset]
 let s:colorcolumnbg = ["234", "225", "#1c1c1c", "#DDDDDD"][s:offset]
 let s:colorcolumnfg = ["220", "220", "ffdf00", "#DDDDDD"][s:offset]
@@ -43,13 +36,13 @@ let s:warningmsg = ["39", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:matchparen = ["9", "3", "#ff0087", "#DDDDDD"][s:offset]
 let s:statustitle = ["24", "124", "#a7d42c", "#DDDDDD"][s:offset]
 let s:menu = ["249", "75", "#eeeeee", "#eeeeee"][s:offset]
-let s:comment = ["126", "243", "#878787", "#DDDDDD"][s:offset]
+let s:comment = ["11", "243", "#878787", "#DDDDDD"][s:offset]
 let s:todo = ["5", "30", "#dfffdf", "#DDDDDD"][s:offset]
 let s:number = ["2", "170", "#ff87af", "#DDDDDD"][s:offset]
 let s:boolean = ["141", "94", "#af87ff", "#DDDDDD"][s:offset]
 let s:constant = ["6", "91", "#af87ff", "#DDDDDD"][s:offset]
 let s:conditional = ["1", "125", "#ff0087", "#DDDDDD"][s:offset]
-let s:string = ["4", "55", "#ffffdf", "#DDDDDD"][s:offset]
+let s:string = ["3", "55", "#ffffdf", "#DDDDDD"][s:offset]
 let s:identifier = ["3", "166", "#ffaf00", "#DDDDDD"][s:offset] " - git commit diff & vimVar
 let s:preproc = ["6", "20", "#ff0087", "#DDDDDD"][s:offset]
 let s:statement = ["152", "89", "#ff0087", "#DDDDDD"][s:offset]
@@ -61,9 +54,10 @@ let s:rubysymbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:rubyexception = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:rubydefine = ["1", "3", "#a71d5d", "#DDDDDD"][s:offset]
 let s:rubycontrol = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
+let s:cinclude = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:function = ["6", "22", "#87dfff", "#DDDDDD"][s:offset]
 let s:operator = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
-let s:type = ["91", "90", "#00ffff", "#DDDDDD"][s:offset]
+let s:type = ["4", "90", "#00ffff", "#DDDDDD"][s:offset]
 let s:special = ["108", "17", "#00ffff", "#DDDDDD"][s:offset]
 let s:question = ["124", "28", "#ff0087", "#DDDDDD"][s:offset]
 let s:warning = ["124", "87", "#ff0087", "#DDDDDD"][s:offset]
@@ -114,6 +108,8 @@ exec 'hi clojureFunc ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojuref
 exec 'hi clojureMacro ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojuremacro
 exec 'hi clojureDefine ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojuredefine
 exec 'hi clojureKeyword ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojurekeyword
+exec 'hi cInclude ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:cinclude
+exec 'hi cCharacter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
 exec 'hi shDerefVar ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shderefvar
 exec 'hi shVariable ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shvariable
 exec 'hi shConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shconditional

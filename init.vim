@@ -55,7 +55,7 @@ augroup filetypeCustomisations
 augroup END
 
 set background=light
-color white
+color night
 
 if has("gui_running")
     set guifont=Inconsolata:h16
@@ -204,3 +204,12 @@ if getline(1) =~# '^#!.*/usr/bin/env\s\+scsh.*\>'
 endif
 
 nnoremap <leader>y :belowright split \| term tmux attach -t repl<CR>
+
+function! SyntaxStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+command! SyntaxStack :call SyntaxStack()
