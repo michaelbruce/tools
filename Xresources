@@ -25,44 +25,6 @@ XTerm*eightBitInput:   false
 XTerm*eightBitOutput:  true
 XTerm*metaSendsEscape: True
 
-! White Colorscheme
-
-*xterm*background: #ffffff
-*xterm*foreground: #2b2b2b
-*xterm*cursorColor: #2b2b2b
-
-! Black/grey
-*xterm*color0: #2b2b2b
-*xterm*color8: #7c7c7c
-
-! Red
-*xterm*color1: #94064b
-*xterm*color9: #b9075d
-
-! Green
-*xterm*color2: #009211
-*xterm*color10: #009211
-
-! Yellow
-*xterm*color3: #c37522
-*xterm*color11: #ebc032
-
-! Blue
-*xterm*color4: #182981
-*xterm*color12: #223bbc
-
-! Magenta (Purple in this time)
-*xterm*color5: #664892
-*xterm*color13: #996cda
-
-! Cyan (Light Pink in this theme)
-*xterm*color6: #0e72a4
-*xterm*color14: #13a1e7
-
-! White
-*xterm*color7: #ffffff
-*xterm*color15: #ffffff
-
 ! Fix for Ctrl+h calling backspace
 
 xterm.*backarrowKey: false

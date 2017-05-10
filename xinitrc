@@ -11,6 +11,7 @@ fi
 LANG="en_GB.UTF-8"
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+xrdb -merge ~/tools/colors/black.xresource
 
 xmodmap ~/.Xmodmap
 
