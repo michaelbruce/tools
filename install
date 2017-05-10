@@ -12,7 +12,7 @@ function symlink_nvim_configuration {
     for colorscheme in white night; do
         if [[ ! -e ~/.config/nvim/colors/$colorscheme.vim ]]; then
             mkdir -p ~/.config/nvim/colors
-            ln -sfv $BASE/colors/$colorscheme.vim ~/.config/nvim/colors/$colorscheme.vim
+            ln -sfv $BASE/appearance/$colorscheme.vim ~/.config/nvim/colors/$colorscheme.vim
         fi
     done
 }
