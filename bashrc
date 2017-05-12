@@ -17,6 +17,8 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
 export EDITOR=nvim
+export SB_ROOT=~/code
+
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
 
 if [ -z "$PATH_EXPANDED" ]; then
@@ -60,11 +62,10 @@ alias ts0="printf '\e[8;50;100t'"
 alias ts1="printf '\e[8;50;160t'"
 alias ts2="printf '\e[8;20;100t'"
 alias ..='cd ..'
-alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
 alias vimdiff='nvim -d'
-
 
 # Ice dev
 alias ice='cd ~/.config/nvim/plugged/ice.nvim'
