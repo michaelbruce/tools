@@ -1,14 +1,5 @@
 ! vim:set ft=xdefaults:
 ! Lucid Black Colorscheme
-! rgb values
-! black is 27 29 30
-! white is 248 248 242
-! yellow is 230 218 123
-! red is 246 45 113
-! magenta is (purple) 171 131 248
-! blue is 107 217 237
-! green is 167 224 64
-! orange (light yellow) is 252 150 32
 
 *xterm*background: #1b1d1e
 *xterm*foreground: #f8f8f2
@@ -24,7 +15,7 @@
 
 ! Green
 *xterm*color2: #a7e040
-*xterm*color10: #009211
+*xterm*color10: #afffaf
 
 ! Yellow
 *xterm*color3: #e6da7b
