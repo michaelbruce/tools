@@ -16,8 +16,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/rainbow_parentheses.vim', { 'on' : 'RainbowParentheses' }
 Plug 'guns/xterm-color-table.vim', { 'on' : 'XtermColorTable' }
-Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Languages
 Plug 'sentient-lang/vim-sentient', { 'for' : 'sentient' }
@@ -50,7 +48,6 @@ augroup filetypeCustomisations
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
   autocmd BufNewFile,BufReadPost *.pxi set filetype=clojure
-  autocmd BufNewFile,BufReadPost *.{clj,cljs} silent! JackIn
   autocmd BufNewFile,BufReadPost .Rprofile set filetype=r
 augroup END
 
@@ -97,85 +94,11 @@ inoremap <C-d>        <C-o>x
 inoremap <C-f>        <C-o>l
 inoremap <C-b>        <C-o>h
 
-command! JackIn :Connect nrepl://127.0.0.1:9999 %:h
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Selecta Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
-
-function! SelectaFile(path)
-    call SelectaCommand(
-                \"find " . a:path . "/* -path ./target -prune " .
-                \"-o -type f ! -regex '.*\\(pyc\\|gz\\)' -print", "", ":e")
-endfunction
-
-nnoremap <leader>f :FZF<cr>
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=7
-  highlight fzf2 ctermfg=23 ctermbg=7
-  highlight fzf3 ctermfg=237 ctermbg=7
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fzf\ -
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-
-" nnoremap <leader>f :call SelectaFile(".")<cr>
-nnoremap <leader>w :call SelectaCommand(
-            \"find " .
-            \"$(find ~/code/* -maxdepth 0 -type d \| selecta)" .
-            \"/* -type f ! -name '*.gz'", "", ":view")<cr>
-
-function! DeploySalesforce()
-    let l:filepath = 'src' . split(expand('%:p'), 'src')[-1]
-    execute "!apex_deploy.sh " . l:filepath . "
-        \ ~/dotfiles/tooling-force.com-0.3.4.0.jar
-        \ ~/notes/SingletrackDev.properties
-        \ ~/code/Singletrack-Core/SingletrackDev/"
-endfunction
-
-command! DeploySalesforce :call DeploySalesforce()
-
 function! Tags()
     exec "!ctags -R $(git rev-parse --show-toplevel || echo \".\")"
 endfunction
 
 command! Tags :call Tags()
-
-" does this even work?
-if expand('%:t') == 'build.boot'
-  let b:fireplace_ns = 'boot.user'
-endif
 
 let g:clojure_syntax_keywords = {
     \ 'clojureMacro': ["deftask", "defproject", "defcustom"],
@@ -213,3 +136,26 @@ function! SyntaxStack()
 endfunc
 
 command! SyntaxStack :call SyntaxStack()
+
+function! Selecta() abort
+  belowright split
+  enew
+  let options = { 'buf': bufnr('') }
+
+  function! options.on_stdout(job_id, data, event)
+    let g:selecta_output = substitute(join(a:data), "", "", "g")
+  endfunction
+
+  function! options.on_exit(id, code, _event)
+    execute 'bd!' self.buf
+    execute 'e ' . g:selecta_output
+  endfunction
+
+  call termopen("echo -ne $(find ./* -path ./target -prune -o -type f -print | selecta)", options)
+  startinsert
+endfunction
+
+command! Selecta call Selecta()
+
+nnoremap <leader>f :Selecta<CR>
+
