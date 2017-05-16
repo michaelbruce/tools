@@ -63,6 +63,7 @@ let s:question = ["124", "28", "#ff0087", "#DDDDDD"][s:offset]
 let s:warning = ["124", "87", "#ff0087", "#DDDDDD"][s:offset]
 let s:error = ["44", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:nontext = ["6", "20", "#ff0087", "#DDDDDD"][s:offset]
+let s:delimiter = ["10", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureparen = ["10", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurecond = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureconstant = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
@@ -133,6 +134,7 @@ exec 'hi javaSpecialCharError ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s
 hi SpellBad         guifg=white       guibg=#FF6C60     gui=BOLD      ctermfg=16         ctermbg=160    cterm=NONE
 " NonText include tilde ~ colour
 exec 'hi NonText ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:nontext . ' ' . s:display . '=NONE'
+exec 'hi Delimiter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:delimiter . ' ' . s:display . '=NONE'
 exec 'hi MatchParen ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:matchparen
 
 " ir_black doesn't highlight operators for some reason
