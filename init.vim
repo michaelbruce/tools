@@ -135,6 +135,7 @@ endfunc
 command! SyntaxStack :call SyntaxStack()
 
 function! Selecta() abort
+  let g:selecta_original_window = win_getid()
   belowright split
   enew
   let options = { 'buf': bufnr('') }
@@ -145,7 +146,8 @@ function! Selecta() abort
 
   function! options.on_exit(id, code, _event)
     execute 'bd!' self.buf
-    if g:selecta_output !~ "Interrupt"
+    if g:selecta_output !~ "Interrupt" && g:selecta_output != " "
+      call win_gotoid(g:selecta_original_window)
       execute 'e ' . g:selecta_output
     endif
   endfunction
