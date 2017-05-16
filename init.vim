@@ -1,11 +1,8 @@
-" vimrc
-" Author:       Michael Bruce <http://michaelbruce.online/>
-"
-" This is your survival vim setup
+" VI configuration
+" Author: Michael Bruce <mike@bearmetalcoding.com>
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
 autocmd!
-
 silent! call plug#begin('~/.config/nvim/plugged')
 
 Plug 'michaelbruce/vim-sane'
@@ -148,7 +145,9 @@ function! Selecta() abort
 
   function! options.on_exit(id, code, _event)
     execute 'bd!' self.buf
-    execute 'e ' . g:selecta_output
+    if g:selecta_output !~ "Interrupt"
+      execute 'e ' . g:selecta_output
+    endif
   endfunction
 
   call termopen("echo -ne $(find ./* -path ./target -prune -o -type f -print | selecta)", options)
