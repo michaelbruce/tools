@@ -11,6 +11,7 @@ Plug 'michaelbruce/vim-notes',   { 'for' : 'notes' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim', { 'on' : 'RainbowParentheses' }
 Plug 'guns/xterm-color-table.vim', { 'on' : 'XtermColorTable' }
 
@@ -166,3 +167,17 @@ let r_indent_align_args = 0
 " Set vim-r-plugin to mimics ess :
 let r_indent_ess_comments = 0
 let r_indent_ess_compatible = 0
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+function! AgSearch() abort
+  let s:word_under_cursor = expand("<cword>")
+  belowright vsplit
+  execute 'term ag "' . s:word_under_cursor . '"'
+endfunction
+
+nnoremap K :call AgSearch()<CR>

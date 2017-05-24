@@ -17,6 +17,12 @@ function symlink_nvim_configuration {
     done
 }
 
+function symlink_emacs_configuration {
+    mkdir -p ~/.emacs.d
+    ln -sfv $BASE/init.el ~/.emacs.d/init.el
+    ln -sfv $BASE/emacs-lib ~/.emacs.d/emacs-lib
+}
+
 function symlink_tools_to_home_directory {
     for rc in *rc *profile Xresources gitconfig githelpers; do
         mkdir -pv backup
@@ -36,6 +42,7 @@ function symlink_tools_to_home_directory {
     [ ! -e ~/.tmux.conf ] && ln -sfv $BASE/tmux.conf ~/.tmux.conf
 
     symlink_nvim_configuration
+    symlink_emacs_configuration
 }
 
 function install_ruby_tools {
