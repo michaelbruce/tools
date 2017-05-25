@@ -1,0 +1,26 @@
+#!/bin/bash -e
+
+export PLATFORM=$(uname -s)
+
+if [ ! -d "$HOME/code/emacs" ]; then
+    git clone git://git.savannah.gnu.org/emacs.git ~/code/emacs
+else
+    git pull --ff-only
+fi
+
+cd $HOME/code/emacs
+
+if [ "$PLATFORM" == Darwin ]; then
+    ./autogen.sh
+    ./configure --with-ns --without-gnutls
+else
+    ./autogen.sh
+    ./configure --with-x
+fi
+
+sudo make install
+
+if [ "$PLATFORM" == Darwin ]; then
+    sudo cp -r nextstep/Emacs.app /Applications/Emacs.app
+    ln -sfv /Applications/Emacs.app/Contents/MacOS/Emacs /usr/local/bin/emacs
+fi

@@ -47,6 +47,7 @@ chruby 2.3.1
 [ -f /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
 # Do I want fzf in bash? [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+alias em='emacs -nw'
 alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
 alias space='df -h'
 alias .space='du -h'
