@@ -597,9 +597,9 @@
 ;;    `(rst-level-5-face ((,class (:foreground ,radiant-cyan))))
 ;;    `(rst-level-6-face ((,class (:foreground ,radiant-green-1))))
 
-;;    ;; show-paren
-;;    `(show-paren-mismatch ((,class (:foreground ,radiant-red-3 :background ,radiant-black))))
-;;    `(show-paren-match ((,class (:foreground ,radiant-cyan))))
+   ;; show-paren
+   `(show-paren-mismatch ((,class (:foreground ,night-red-1 :background ,night-black-1))))
+   `(show-paren-match ((,class (:foreground ,night-cyan-1))))
 
 ;;    `(naeu-green-face ((,class (:foreground ,radiant-green :background ,radiant-black))))
 ;;    `(naeu-pink-face ((,class (:foreground ,radiant-pink-1 :background ,radiant-black))))
