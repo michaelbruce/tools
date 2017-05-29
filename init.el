@@ -14,7 +14,7 @@
       (blink-cursor-mode -1)
       (tooltip-mode nil)
       (if (eq system-type 'darwin)
-          (set-frame-font "Inconsolata Bold 14")
+          (set-frame-font "Inconsolata Bold 19")
         (set-frame-font "Inconsolata Bold 15"))))
 
 (global-set-key (kbd "M-o") 'other-window)
