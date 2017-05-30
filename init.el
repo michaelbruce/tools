@@ -21,6 +21,7 @@
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-[") 'hippie-expand)
 (global-set-key (kbd "C-q") 'find-something)
+(global-set-key (kbd "C-j") 'newline)
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 

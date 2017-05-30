@@ -116,12 +116,70 @@ See https://github.com/abo-abo/swiper/wiki/ivy-display-function."
   (let ((find-recursive-last (and (active-minibuffer-window) find-last))
         ;; transformer-fn not a def'd function... - passed in via display-transformer-fn - skipping for now
         (find-display-function)
-        (let ((buffer-undo-list t))
-          (save-excursion
-            (forward-line 1)
-            (insert text)))
-        )))
+        ;; (let ((buffer-undo-list t))
+        ;;   (save-excursion
+        ;;     (forward-line 1)
+        ;;     (insert text)))
+        (find-display-function
+         (unless (window-minibuffer-p)
+           (cdr (assoc caller find-display-functions-alist))))) ;; find-display-functions-alist undef'd
+    (setq find-last
+          (make-ivy-state
+           :prompt prompt
+           :collection collection
+           :predicate predicate
+           :require-match require-match
+           :initial-input initial-input
+           :history history
+           :preselect preselect
+           :keymap keymap
+           :update-fn update-fn
+           :sort sort
+           :frame (selected-frame)
+           :window (selected-window)
+           :buffer (current-buffer)
+           :unwind unwind
+           :re-builder re-builder
+           :matcher matcher
+           :dynamic-collection dynamic-collection
+           :dynamic-transformer-fn transformer-fn
+           :directory default-directory
+           :caller
+           ))
+    ;; (find--reset-state find-last)
+    (prog1
+        (unwind-protect
+            (minibuffer-with-setup-hook
+                #'find--minibuffer-setup
+              ;; XXX currently investigating what minibuffer-setup, sets up.
+              )))
+    )
   )
+
+  (defun find--reset-state (state)
+    (unless (equal (selected-frame) (find-state-frame state))
+      (selected-window (active-minibuffer-window)))
+
+    (let ((prompt (or (find-state-prompt) ""))
+          (collection (find-state-collection state))
+          (predicate (find-state-collection))
+          (history (find-state-history state))
+          ;; there are more- include when necessery
+          )
+
+      (unless initial-input
+        (setq initial-input (cdr (assoc this-command ; what is this-command?
+                                        find-initial-inputs-alist))))
+      (setq find--directory nil)
+
+      ;; (setq find-regex-function)
+      (setq find--old-text "")
+      (setq find-text "")
+
+      ;; reb? what is reb?
+      ;; sets a lot of variables... let's come back to this as I don't know what the variables are used for yet!
+      )
+    ))  
 
 (defun find-something ()
   (interactive)
