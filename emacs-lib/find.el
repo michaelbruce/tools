@@ -79,6 +79,50 @@
 ;;              (eq this-command 'find-dispatching-done))
 ;;          )))
 
+(defcustom ivy-display-function nil
+  "Decide where to display the candidates.
+This function takes a string with the current matching candidates
+and has to display it somewhere.
+See https://github.com/abo-abo/swiper/wiki/ivy-display-function."
+  :type '(choice
+          (const :tag "Minibuffer" nil)
+          (const :tag "LV" ivy-display-function-lv)
+          (const :tag "Popup" ivy-display-function-popup)
+          (const :tag "Overlay" ivy-display-function-overlay)))
+
+
+;;;###autoload
+(cl-defun find-read
+    (prompt
+     collection
+     &key
+     predicate
+     require-match
+     initial-input
+     history
+     preselect
+     keymap
+     update-fn
+     sort
+     action
+     unwind
+     re-builder
+     matcher
+     dynamic-collection
+     caller)
+  ;; reaached L1503 here as we include no extra sources or actions
+  ;; I believe x-recursive-last is a variable that will hold the state of
+  ;; the buffer/find utility
+  (let ((find-recursive-last (and (active-minibuffer-window) find-last))
+        ;; transformer-fn not a def'd function... - passed in via display-transformer-fn - skipping for now
+        (find-display-function)
+        (let ((buffer-undo-list t))
+          (save-excursion
+            (forward-line 1)
+            (insert text)))
+        )))
+  )
+
 (defun find-something ()
   (interactive)
   (prog1
