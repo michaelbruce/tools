@@ -160,12 +160,13 @@ See https://github.com/abo-abo/swiper/wiki/ivy-display-function."
     (unless (equal (selected-frame) (find-state-frame state))
       (selected-window (active-minibuffer-window)))
 
-    (let ((prompt (or (find-state-prompt) ""))
-          (collection (find-state-collection state))
-          (predicate (find-state-collection))
-          (history (find-state-history state))
-          ;; there are more- include when necessery
-          )
+    ;; XXX commented out - find-state-X are generated via macros
+    ;; (let ((prompt (or (find-state-prompt) ""))
+    ;;       (collection (find-state-collection state))
+    ;;       (predicate (find-state-collection))
+    ;;       (history (find-state-history state))
+    ;;       ;; there are more- include when necessery
+    ;;       )
 
       (unless initial-input
         (setq initial-input (cdr (assoc this-command ; what is this-command?
@@ -178,8 +179,8 @@ See https://github.com/abo-abo/swiper/wiki/ivy-display-function."
 
       ;; reb? what is reb?
       ;; sets a lot of variables... let's come back to this as I don't know what the variables are used for yet!
-      )
-    ))  
+      ;; ) ;; ending currently commented let block
+    )  
 
 (defun find-something ()
   (interactive)
