@@ -36,6 +36,9 @@
 (autoload 'r-mode "r-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.\\(r\\|R\\)\\'" . r-mode))
 
+(autoload 'racket-mode "racket-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
 (setq vc-follow-symlinks nil)
 
 (setq inferior-lisp-program "racket")
