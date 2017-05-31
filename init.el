@@ -37,3 +37,5 @@
 (add-to-list 'auto-mode-alist '("\\.\\(r\\|R\\)\\'" . r-mode))
 
 (setq vc-follow-symlinks nil)
+
+(setq inferior-lisp-program "racket")
