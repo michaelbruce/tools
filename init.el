@@ -14,7 +14,7 @@
       (blink-cursor-mode -1)
       (tooltip-mode nil)
       (if (eq system-type 'darwin)
-          (set-frame-font "Inconsolata Bold 19")
+          (set-frame-font "Inconsolata Bold 16")
         (set-frame-font "Inconsolata Bold 15"))))
 
 (global-set-key (kbd "M-o") 'other-window)
@@ -23,9 +23,10 @@
 (global-set-key (kbd "C-q") 'find-something)
 (global-set-key (kbd "C-j") 'newline)
 (global-set-key (kbd "C-q") (lambda () (interactive) (ido-find-file-in-dir "~/code")))
-
+(global-set-key (kbd "M-;") 'ido-find-in-project)
 
 (setq backup-directory-alist `(("." . "~/.saves")))
+(setq auto-save-default nil) ;; don't include #edited.el# files
 
 (add-to-list 'load-path "~/.emacs.d/emacs-lib")
 
@@ -43,7 +44,7 @@
 
 (setq vc-follow-symlinks nil)
 
-(setq inferior-lisp-program "racket")
+(setq inferior-lisp-program "csi")
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)
@@ -51,10 +52,17 @@
 (defun ido-find-in-project ()
   (interactive)
   (save-excursion
-    (let ((enable-recursive-minibuffers t)
-          (find-file))
-      ;; (shell-command-to-string "git ls-files"))
-    (ido-completing-read ">>> "
-                         ;; (shell-command-to-string "git ls-files")
-                         (split-string (shell-command-to-string "git ls-files") "\n")
-                        nil t))))
+    (let ((git-root (shell-command-to-string
+                     "echo -ne $(git rev-parse --show-toplevel || echo \".\")"))
+          (enable-recursive-minibuffers t))
+      (find-file
+       (concat
+        git-root
+        "/"
+        (ido-completing-read
+         ">>> "
+         (split-string
+          (shell-command-to-string
+           (concat "cd " git-root " && git ls-files")) "\n")
+         nil
+         t))))))
