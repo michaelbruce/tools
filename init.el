@@ -22,6 +22,8 @@
 (global-set-key (kbd "M-[") 'hippie-expand)
 (global-set-key (kbd "C-q") 'find-something)
 (global-set-key (kbd "C-j") 'newline)
+(global-set-key (kbd "C-q") (lambda () (interactive) (ido-find-file-in-dir "~/code")))
+
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -42,3 +44,17 @@
 (setq vc-follow-symlinks nil)
 
 (setq inferior-lisp-program "racket")
+
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+
+(defun ido-find-in-project ()
+  (interactive)
+  (save-excursion
+    (let ((enable-recursive-minibuffers t)
+          (find-file))
+      ;; (shell-command-to-string "git ls-files"))
+    (ido-completing-read ">>> "
+                         ;; (shell-command-to-string "git ls-files")
+                         (split-string (shell-command-to-string "git ls-files") "\n")
+                        nil t))))
