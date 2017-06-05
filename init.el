@@ -25,6 +25,11 @@
 (global-set-key (kbd "C-q") (lambda () (interactive) (ido-find-file-in-dir "~/code")))
 (global-set-key (kbd "M-;") 'ido-find-in-project)
 
+(defun bind-ido-keys ()
+  (define-key ido-completion-map (kbd "C-w") 'ido-delete-backward-word-updir))
+
+(add-hook 'ido-setup-hook #'bind-ido-keys)
+
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil) ;; don't include #edited.el# files
 
@@ -44,7 +49,7 @@
 
 (setq vc-follow-symlinks nil)
 
-(setq inferior-lisp-program "csi")
+(setq inferior-lisp-program "scheme")
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)
