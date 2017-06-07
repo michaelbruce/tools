@@ -12,23 +12,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/rainbow_parentheses.vim', { 'on' : 'RainbowParentheses' }
-Plug 'guns/xterm-color-table.vim', { 'on' : 'XtermColorTable' }
-
-" Languages
-Plug 'sentient-lang/vim-sentient', { 'for' : 'sentient' }
-Plug 'michaelbruce/vim-chruby', { 'for' : 'ruby' }
 Plug 'michaelbruce/ice.nvim'
 Plug 'michaelbruce/vim-parengage', { 'for' : ['clojure', 'lisp'] }
-Plug 'guns/vim-clojure-static', { 'for' : 'clojure' }
-Plug 'guns/vim-clojure-highlight', { 'for' : 'clojure' }
-Plug 'rust-lang/rust.vim',  { 'for': 'rust' }
-Plug 'cespare/vim-toml',  { 'for': 'toml' }
-Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
 
 call plug#end()
 
-syn on
+syntax on
+set background=dark
+color night
 
 augroup filetypeCustomisations
   autocmd!
@@ -38,19 +29,11 @@ augroup filetypeCustomisations
   au FileType gitcommit set textwidth=72
   autocmd FileType c set complete-=i
   autocmd BufNewFile,BufReadPost *.notes set filetype=notes
-  autocmd BufNewFile,BufReadPost *.cls set filetype=java
-  autocmd BufNewFile,BufReadPost *.trigger set filetype=java
-  autocmd BufNewFile,BufReadPost *.component set filetype=htmlm4
-  autocmd BufNewFile,BufReadPost *.page set filetype=htmlm4
   autocmd BufNewFile,BufReadPost *.html set filetype=htmlm4
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
-  autocmd BufNewFile,BufReadPost *.pxi set filetype=clojure
   autocmd BufNewFile,BufReadPost .Rprofile set filetype=r
 augroup END
-
-set background=light
-color night
 
 if has("gui_running")
     set guifont=Inconsolata:h16
