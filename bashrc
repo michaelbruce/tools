@@ -115,7 +115,16 @@ git_state() {
     fi
 }
 
-PROMPT_COMMAND='PS1="\W($(git_state)) $CYAN\$$NORMAL "'
+is_job_active_prompt() {
+    if [[ $(jobs -p) -eq "" ]]; then
+        color=$CYAN
+    else
+        color=$YELLOW
+    fi
+    echo -ne "${color}\$${NORMAL}"
+}
+
+PROMPT_COMMAND='PS1="\W($(git_state)) $(is_job_active_prompt) "'
 
 viw() {
     vi `which "$1"`
