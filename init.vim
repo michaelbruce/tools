@@ -12,7 +12,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
-Plug 'michaelbruce/ice.nvim'
+Plug 'michaelbruce/vim-chruby', { 'for' : ['ruby', 'clojure'] }
+Plug 'michaelbruce/ice.nvim', { 'for' : ['clojure'] }
 Plug 'michaelbruce/vim-parengage', { 'for' : ['clojure', 'lisp'] }
 
 call plug#end()
