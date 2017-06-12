@@ -54,6 +54,8 @@ let s:rubysymbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:rubyexception = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:rubydefine = ["1", "3", "#a71d5d", "#DDDDDD"][s:offset]
 let s:rubycontrol = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
+let s:rnowebchunk = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
+let s:texdoczone = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:cinclude = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:function = ["6", "22", "#87dfff", "#DDDDDD"][s:offset]
 let s:operator = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
@@ -63,7 +65,7 @@ let s:question = ["124", "28", "#ff0087", "#DDDDDD"][s:offset]
 let s:warning = ["124", "87", "#ff0087", "#DDDDDD"][s:offset]
 let s:error = ["44", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:nontext = ["6", "20", "#ff0087", "#DDDDDD"][s:offset]
-let s:delimiter = ["10", "87", "#5fafdf", "#DDDDDD"][s:offset]
+let s:delimiter = ["7", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureparen = ["10", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurecond = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureconstant = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
@@ -114,6 +116,13 @@ exec 'hi cCharacter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
 exec 'hi shDerefVar ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shderefvar
 exec 'hi shVariable ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shvariable
 exec 'hi shConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shconditional
+exec 'hi rConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi rRegion ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi rRepeat ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi rnowebChunk ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnowebchunk
+exec 'hi rnowebDelimiter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnowebchunk
+exec 'hi texDocZone ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:texdoczone
+exec 'hi texPartZone ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:text
 " exec 'hi Visual ' . s:display . 'bg=' . s:visual . ' ' . s:display . 'fg=NONE'
 exec 'hi Visual ' . s:display . 'bg=1 ' . s:display . 'fg=7'
 exec 'hi String ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
