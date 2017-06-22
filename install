@@ -20,6 +20,7 @@ function symlink_nvim_configuration {
 function symlink_emacs_configuration {
     mkdir -p ~/.emacs.d
     ln -sfv $BASE/init.el ~/.emacs.d/init.el
+    [ -L ~/.emacs.d/emacs-lib ] && unlink ~/.emacs.d/emacs-lib
     ln -sfv $BASE/emacs-lib ~/.emacs.d/emacs-lib
 }
 
