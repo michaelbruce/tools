@@ -28,6 +28,7 @@ augroup filetypeCustomisations
   au FileType vim setl sw=2 sts=2 et
   au FileType r setl sw=2 sts=2 et
   au FileType gitcommit set textwidth=72
+  au FileType markdown set textwidth=79
   autocmd FileType c set complete-=i
   autocmd BufNewFile,BufReadPost *.notes set filetype=notes
   autocmd BufNewFile,BufReadPost *.html set filetype=htmlm4
