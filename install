@@ -55,9 +55,9 @@ function install_ruby_tools {
     fi
 
     if [[ ! -e /usr/local/bin/ruby-install ]]; then
-        wget -O /tmp/ruby-install-0.5.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.5.0.tar.gz
-        tar -xzvf /tmp/ruby-install-0.5.0.tar.gz -C /tmp
-        cd /tmp/ruby-install-0.5.0
+        wget -O ruby-install-0.6.1.tar.gz https://github.com/postmodern/ruby-install/archive/v0.6.1.tar.gz
+        tar -xzvf ruby-install-0.6.1.tar.gz
+        cd ruby-install-0.6.1/
         sudo make install
         cd -
     fi
@@ -103,11 +103,29 @@ function install_core_utils {
         if [[ ! -e /usr/local/bin/brew ]]; then
             /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         fi
-        # check you don't have these either
-        brew install wget bash findutils tmux ag gpg pass autoconf automake gnutls git-crypt htop cmake
-        brew install libtool automake cmake pkg-config gettext
-        # rlwrap phantomjs
-        # findutils should map gfind to find if not automatic?
+
+        join_by() { local IFS="$1"; shift; echo "$*"; }
+
+        packages=(
+        ag
+        autoconf
+        automake
+        bash
+        cmake
+        findutils
+        gettext
+        git-crypt
+        gnutls
+        gpg
+        htop
+        libtool
+        pass
+        pkg-config
+        tmux
+        wget
+        )
+
+        brew install $(join_by : "${binary_directories[@]}")
     fi
 }
 
