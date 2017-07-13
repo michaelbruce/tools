@@ -15,7 +15,7 @@
       (tooltip-mode nil)
       (if (eq system-type 'darwin)
           (set-frame-font "Inconsolata Bold 16")
-        (set-frame-font "Inconsolata Bold 15"))))
+        (set-frame-font "Inconsolata Bold 17"))))
 
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-w") 'backward-kill-word)
@@ -24,6 +24,7 @@
 (global-set-key (kbd "C-j") 'newline)
 (global-set-key (kbd "C-q") (lambda () (interactive) (ido-find-file-in-dir "~/code")))
 (global-set-key (kbd "M-;") 'ido-find-in-project)
+(global-set-key (kbd "C-c 1") (lambda () (interactive) (set-frame-size (selected-frame) 160 50)))
 
 (defun bind-ido-keys ()
   (define-key ido-completion-map (kbd "C-w") 'ido-delete-backward-word-updir))
@@ -46,6 +47,9 @@
 
 (autoload 'racket-mode "racket-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(autoload 'clojure-mode "clojure-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.\\cljs+\\'" . clojure-mode))
 
 (setq vc-follow-symlinks nil)
 
