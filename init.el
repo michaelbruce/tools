@@ -3,7 +3,6 @@
 (menu-bar-mode -1)
 (setq inhibit-startup-message t)
 
-(setq-default indent-tabs-mode nil) ;; always use spaces  
 (show-paren-mode 1)
 
 (if (display-graphic-p)
@@ -25,13 +24,15 @@
 (global-set-key (kbd "C-q") (lambda () (interactive) (ido-find-file-in-dir "~/code")))
 (global-set-key (kbd "M-;") 'ido-find-in-project)
 (global-set-key (kbd "C-c 1") (lambda () (interactive) (set-frame-size (selected-frame) 160 50)))
+(global-set-key (kbd "C-c 2") (lambda () (interactive) (set-frame-size (selected-frame) 100 40)))
+(global-set-key (kbd "C-c h") help-map)
+(global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 
 (defun bind-ido-keys ()
   (define-key ido-completion-map (kbd "C-w") 'ido-delete-backward-word-updir))
 
 (add-hook 'ido-setup-hook #'bind-ido-keys)
 
-(setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil) ;; don't include #edited.el# files
 
 (add-to-list 'load-path "~/.emacs.d/emacs-lib")
@@ -49,11 +50,13 @@
 (add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
 
 (autoload 'clojure-mode "clojure-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.\\cljs+\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(cljs?\\|boot\\)\\'" . clojure-mode))
 
 (setq vc-follow-symlinks nil)
 
-(setq inferior-lisp-program "scheme")
+;; use (run-scheme) for scheme..
+;; use comint-run for others like R..
+(setq inferior-lisp-program "boot repl")
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)
@@ -75,3 +78,24 @@
            (concat "cd " git-root " && git ls-files")) "\n")
          nil
          t))))))
+
+;; editing preferences
+(setq-default
+ column-number-mode t
+ buffers-menu-max-size 30
+ indent-tabs-mode nil
+ delete-selection-mode t
+ make-backup-files nil
+ set-mark-command-repeat-pop t
+ truncate-lines nil)
+
+(defun load-external-packages ()
+  (interactive)
+  (require 'package)
+  (package-initialize)
+  (add-to-list
+   'package-archives
+   `("melpa" . "https://melpa.org/packages/")))
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
