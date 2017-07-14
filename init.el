@@ -26,6 +26,7 @@
 (global-set-key (kbd "C-c 1") (lambda () (interactive) (set-frame-size (selected-frame) 160 50)))
 (global-set-key (kbd "C-c 2") (lambda () (interactive) (set-frame-size (selected-frame) 100 40)))
 (global-set-key (kbd "C-c h") help-map)
+(global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 
 (defun bind-ido-keys ()
@@ -99,3 +100,10 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
+
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(if window-system (set-exec-path-from-shell-PATH))
