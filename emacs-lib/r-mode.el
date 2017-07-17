@@ -9,7 +9,7 @@
 (defconst r-mode-highlights
   '(("<-" . font-lock-constant-face)
     ("function" . font-lock-function-name-face)
-    ("\\(if\\|else\\)" . font-lock-keyword-face)
+    ("\\(if\\|else\\)\\(?:[^a-zA-Z0-9]\\)" . font-lock-keyword-face)
     ))
 
 (defconst numbers-regexp
