@@ -1,4 +1,4 @@
-(defconst yaml-mode-syntax-table
+(defconst markdown-mode-syntax-table
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?' "\"" table)
     (modify-syntax-entry ?\" "\"" table)
@@ -6,7 +6,7 @@
     (modify-syntax-entry ?\n ">" table)
     table))
 
-(defconst yaml-mode-highlights
+(defconst markdown-mode-highlights
   '(("^\s*-+" . font-lock-constant-face)
     ("function" . font-lock-function-name-face)
     ("\\( \\|^\\)\\(\\w\\|_\\)*:" . font-lock-variable-name-face)
@@ -19,11 +19,11 @@
        (*? any)
        symbol-end)))
 
-(defvar yaml-tab-width 2)
+(defvar markdown-tab-width 2)
 
-(define-derived-mode yaml-mode prog-mode "YAML"
-  :syntax-table yaml-mode-syntax-table
-  (setq font-lock-defaults '(yaml-mode-highlights))
+(define-derived-mode markdown-mode prog-mode "MARKDOWN"
+  :syntax-table markdown-mode-syntax-table
+  (setq font-lock-defaults '(markdown-mode-highlights))
   (font-lock-fontify-buffer))
 
-(provide 'yaml-mode)
+(provide 'markdown-mode)
