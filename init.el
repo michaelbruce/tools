@@ -27,6 +27,7 @@
 (global-set-key (kbd "C-c 2") (lambda () (interactive) (set-frame-size (selected-frame) 100 40)))
 (global-set-key (kbd "C-c h") help-map)
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(global-set-key (kbd "C-c c") 'compile-in-project)
 (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 
 (defun bind-ido-keys ()
@@ -64,6 +65,12 @@
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+
+(defun compile-in-project ()
+  (interactive)
+  (let ((default-directory (shell-command-to-string
+                  "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
+    (call-interactively #'compile)))
 
 (defun ido-find-in-project ()
   (interactive)
