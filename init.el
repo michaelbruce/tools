@@ -28,6 +28,7 @@
 (global-set-key (kbd "C-c h") help-map)
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (global-set-key (kbd "C-c c") 'compile-in-project)
+(global-set-key (kbd "C-c b") 'eval-buffer)
 (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 
 (defun bind-ido-keys ()
