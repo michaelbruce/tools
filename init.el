@@ -5,6 +5,8 @@
 
 (show-paren-mode 1)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (if (display-graphic-p)
     (progn
       (add-to-list 'default-frame-alist '(alpha . (90 . 50)))
@@ -16,6 +18,8 @@
           (set-frame-font "Inconsolata Bold 16")
         (set-frame-font "Inconsolata Bold 17"))))
 
+(global-set-key (kbd "M-P") 'make-frame)
+(global-set-key (kbd "M-O") 'delete-other-windows)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-[") 'hippie-expand)
@@ -44,7 +48,13 @@
 
 (load-theme 'night t)
 (require 'utility)
-(require 'find)
+
+;; (defmacro use-mode (name)
+;;   (list 'autoload name (symbol-name name) nil t))
+
+;; (use-mode 'r-mode)
+
+(autoload 'parengage-mode "parengage-mode" nil t)
 
 (autoload 'r-mode "r-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.\\(r\\|R\\)\\'" . r-mode))
@@ -54,13 +64,30 @@
 
 (autoload 'clojure-mode "clojure-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.\\(cljs?\\|boot\\)\\'" . clojure-mode))
+(autoload 'inf-clojure-minor-mode "inf-clojure" nil t)
+(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
+(autoload 'markdown-mode "markdown-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(add-hook 'eval-expression-minibuffer-setup-hook #'parengage-mode)
+
+(dolist (hook
+         '(racket-mode-hook
+           clojure-mode-hook
+           scheme-mode-hook
+           emacs-lisp-mode-hook
+           inferior-lisp-mode-hook
+           eval-expression-minibuffer-setup-hook))
+  (add-hook hook 'parengage-mode))
+
 (setq vc-follow-symlinks nil)
 
 ;; use (run-scheme) for scheme..
+(setq scheme-program-name "csi")
 ;; use comint-run for others like R..
 (setq inferior-lisp-program "boot repl")
 

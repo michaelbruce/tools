@@ -12,7 +12,7 @@
       (night-green-2 "#afffaf")
       (night-yellow-1 "#e6da7b")
       (night-yellow-2 "#fc9620")
-      (night-blue-1 "#333333")
+      (night-blue-1 "#6bd9ed")
       (night-blue-2 "#223bbc")
       (night-magenta-1 "#ab83f8")
       (night-magenta-2 "#996cda")
@@ -88,7 +88,7 @@
    `(vertical-border ((,class (:foreground ,night-black-2 :background ,night-black-1))))
 
    ;;; font lock
-   `(font-lock-builtin-face ((,class (:foreground ,night-red-1))))
+   `(font-lock-builtin-face ((,class (:foreground ,night-cyan-1))))
    `(font-lock-comment-face ((,class (:foreground ,night-black-2 :italic t))))
    ;; `(font-lock-comment-delimiter-face ((,class (:foreground ,radiant-green)))) 
    `(font-lock-constant-face ((,class (:foreground ,night-cyan-1))))
@@ -99,8 +99,8 @@
    ;; `(font-lock-negation-char-face ((,class (:foreground ,radiant-fg))))
    `(font-lock-preprocessor-face ((,class (:foreground ,night-black-2))))
    `(font-lock-string-face ((,class (:foreground ,night-yellow-1))))
-   `(font-lock-type-face ((,class (:foreground ,night-magenta-1))))
-   `(font-lock-variable-name-face ((,class (:foreground ,night-magenta-1))))
+   `(font-lock-type-face ((,class (:foreground ,night-red-1))))
+   `(font-lock-variable-name-face ((,class (:foreground ,night-green-1))))
    `(font-lock-warning-face ((,class (:foreground ,night-magenta-1))))
    `(font-lock-reference-face ((,class (:foreground ,night-black-2))))
    `(font-lock-regexp-grouping-backslash ((,class (:foreground ,night-yellow-1))))

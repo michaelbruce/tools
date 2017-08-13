@@ -4,7 +4,4 @@
                   (get-char-property pos 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(defun select-project ()
-  (directory-files "~/code"))
-
 (provide 'utility)

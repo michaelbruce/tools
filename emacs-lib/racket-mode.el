@@ -10,6 +10,7 @@
     ("define" . font-lock-keyword-face)
     ))
 
+;;;###autoload
 (define-derived-mode racket-mode lisp-mode "Racket"
   :syntax-table racket-mode-syntax-table
   (setq font-lock-defaults '(racket-mode-highlights))

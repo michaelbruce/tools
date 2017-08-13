@@ -59,6 +59,7 @@
     ;; (indent-line-to r-tab-width)
     ))
 
+;;;###autoload
 (define-derived-mode r-mode prog-mode "R"
   :syntax-table r-mode-syntax-table
   (setq font-lock-defaults '(r-mode-highlights))

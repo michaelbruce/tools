@@ -36,18 +36,18 @@
 
 (defun parengage-backward-char ()
   (interactive)
-  (if (or (and (string= (string (char-after)) ")")
+  (if (or (eq (char-after) nil)
+          (and (string= (string (char-after)) ")")
                (string= (string (char-before)) "("))
           (and (string= (string (char-after)) "]")
                (string= (string (char-before)) "["))
           (and (string= (string (char-after)) "}")
                (string= (string (char-before)) "{"))
           (and (string= (string (char-after)) "\"")
-               (string= (string (char-before)) "\""))
-          )
+               (string= (string (char-before)) "\"")))
       (progn
         (backward-delete-char 1)
         (delete-char 1))
-    (backward-char 1)))
+    (backward-delete-char 1)))
 
-(provide 'parengage)
+(provide 'parengage-mode)

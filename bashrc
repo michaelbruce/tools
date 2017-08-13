@@ -1,9 +1,3 @@
-# bashrc for OSX/Arch Linux
-
-export PLATFORM=$(uname -s)
-[ -f /etc/bashrc ] && . /etc/bashrc
-[ -f /etc/bash_completion ] && . /etc/bash_completion
-
 shopt -s histappend # Append to the history file
 shopt -s checkwinsize # Check the window size after each command
 shopt -s nocaseglob #case insensitive completion
@@ -16,7 +10,8 @@ export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
-export EDITOR=nvim
+export EDITOR=vim
+export PLATFORM=$(uname -s)
 export SB_ROOT=~/code
 
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
